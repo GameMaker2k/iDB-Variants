@@ -15,44 +15,62 @@
 */
 require('preindex.php');
 $usefileext = $Settings['file_ext'];
-if($ext=="noext"||$ext=="no ext"||$ext=="no+ext") { $usefileext = ""; }
+if ($ext == "noext" || $ext == "no ext" || $ext == "no+ext") {
+    $usefileext = "";
+}
 $filewpath = $exfile['member'].$Settings['file_ext'].$_SERVER['PATH_INFO'];
-if($_GET['act']==null) { $_GET['act'] = "login"; }
-if(!isset($_GET['view'])) { $_GET['view'] = null; }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "login";
+}
+if (!isset($_GET['view'])) {
+    $_GET['view'] = null;
+}
 ?>
 
 <title> <?php echo $Settings['board_name'].$idbpowertitle; ?> </title>
 </head>
 <body>
-<?php if($_GET['act']=="register")
-{ $_GET['act']="signup"; }
-if($_GET['act']=="signin")
-{ $_GET['act']="login"; }
-if($_GET['act']=="signout")
-{ $_GET['act']="logout"; }
-if(!is_numeric($_GET['id']))
-{ $_GET['id']="1"; }
+<?php if ($_GET['act'] == "register") {
+    $_GET['act'] = "signup";
+}
+if ($_GET['act'] == "signin") {
+    $_GET['act'] = "login";
+}
+if ($_GET['act'] == "signout") {
+    $_GET['act'] = "logout";
+}
+if (!is_numeric($_GET['id'])) {
+    $_GET['id'] = "1";
+}
 require($SettDir['inc'].'navbar.php');
-if($_GET['act']=="login"||
-$_POST['act']=="loginmember"||
-$_GET['act']=="logout")
-{ require($SettDir['inc'].'members.php'); } 
-if($_GET['act']=="list"||
-$_GET['act']=="view"||
-$_GET['act']=="signup")
-{ require($SettDir['inc'].'members.php'); } 
-if($_GET['act']=="makemember") {
-if($_POST['act']=="makemembers") {
-require($SettDir['inc'].'members.php'); } } 
+if ($_GET['act'] == "login" ||
+$_POST['act'] == "loginmember" ||
+$_GET['act'] == "logout") {
+    require($SettDir['inc'].'members.php');
+}
+if ($_GET['act'] == "list" ||
+$_GET['act'] == "view" ||
+$_GET['act'] == "signup") {
+    require($SettDir['inc'].'members.php');
+}
+if ($_GET['act'] == "makemember") {
+    if ($_POST['act'] == "makemembers") {
+        require($SettDir['inc'].'members.php');
+    }
+}
 require($SettDir['inc'].'endpage.php');
-if(!isset($membertitle)) { $membertitle = null; }
+if (!isset($membertitle)) {
+    $membertitle = null;
+}
 ?>
 
 </body>
 </html>
-<?php 
-if($membertitle==null) {
-fix_amp($Settings['use_gzip'],$GZipEncode['Type']); }
-if($membertitle!=null) {
-change_title($Settings['board_name'].$membertitle,$Settings['use_gzip'],$GZipEncode['Type']); }
+<?php
+if ($membertitle == null) {
+    fix_amp($Settings['use_gzip'], $GZipEncode['Type']);
+}
+if ($membertitle != null) {
+    change_title($Settings['board_name'].$membertitle, $Settings['use_gzip'], $GZipEncode['Type']);
+}
 ?>

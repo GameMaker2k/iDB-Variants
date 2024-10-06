@@ -60,4 +60,3 @@ $ThemeSet['TitleIcon'] = null;
 $ThemeSet['StatsIcon'] = "<div style=\"text-align: center; font-size: 11px;\" title=\"Board Stats\"><br />(S)<br /></div>&nbsp;";
 $ThemeSet['NoAvatar'] = "themes/iDB/noavatar.png";
 $ThemeSet['NoAvatarSize'] = "100x100";
-?>

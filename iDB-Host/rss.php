@@ -13,16 +13,23 @@
 
     $FileInfo: rss.php - Last Update: 01/01/2008 SVN 144 - Author: cooldude2k $
 */
-//@ini_set("display_errors", true); 
+//@ini_set("display_errors", true);
 //@ini_set("display_startup_errors", true);
 @error_reporting(E_ALL ^ E_NOTICE);
 require_once('mysql.php');
-if($Settings['enable_rss']==false) {
-@header("Content-Type: text/plain; charset=".$Settings['charset']); 
-ob_clean(); echo "Sorry RSS Feeds are not enabled for this board."; 
-gzip_page($Settings['use_gzip'],$GZipEncode['Type']); @mysql_close(); die(); }
-if($_GET['act']==null) { $_GET['act'] = "rss"; }
-if($_GET['act']=="rss"||$_GET['act']=="atom") {
-	$_GET['feedtype'] = $_GET['act']; $Feed['Feed']="Done";
-	require($SettDir['inc'].'rssfeed.php'); }
-?>
+if ($Settings['enable_rss'] == false) {
+    @header("Content-Type: text/plain; charset=".$Settings['charset']);
+    ob_clean();
+    echo "Sorry RSS Feeds are not enabled for this board.";
+    gzip_page($Settings['use_gzip'], $GZipEncode['Type']);
+    @mysql_close();
+    die();
+}
+if ($_GET['act'] == null) {
+    $_GET['act'] = "rss";
+}
+if ($_GET['act'] == "rss" || $_GET['act'] == "atom") {
+    $_GET['feedtype'] = $_GET['act'];
+    $Feed['Feed'] = "Done";
+    require($SettDir['inc'].'rssfeed.php');
+}

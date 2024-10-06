@@ -21,4 +21,3 @@ $ThemeInfo['ThemeVersionType'] = "Pre-Alpha";
 $ThemeInfo['ThemeSubVersion'] = "SVN 144";
 $ThemeInfo['MakerURL'] = "http://upload.idb.s1.jcink.com/";
 $ThemeInfo['CopyRight'] = $ThemeInfo['ThemeName']." was made by <a href=\"".$ThemeInfo['MakerURL']."\" title=\"".$ThemeInfo['ThemeMaker']."\">".$ThemeInfo['ThemeMaker']."</a>";
-?>

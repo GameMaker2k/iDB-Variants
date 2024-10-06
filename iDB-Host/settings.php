@@ -16,8 +16,8 @@
 */
 /*	You Need to install iDB. Run install.php	*/
 $File3Name = basename($_SERVER['SCRIPT_NAME']);
-if ($File3Name=="settings.php"||$File3Name=="/settings.php"||
-    $File3Name=="settingsbak.php"||$File3Name=="/settingsbak.php") {
+if ($File3Name == "settings.php" || $File3Name == "/settings.php" ||
+    $File3Name == "settingsbak.php" || $File3Name == "/settingsbak.php") {
     @header('Location: index.php');
-    exit(); }
-?>
+    exit();
+}

@@ -15,19 +15,25 @@
     $FileInfo: presetup.php - Last Update: 01/01/2008 SVN 144 - Author: cooldude2k $
 */
 $File3Name = basename($_SERVER['SCRIPT_NAME']);
-if ($File3Name=="presetup.php"||$File3Name=="/presetup.php") {
-	require('index.php');
-	exit(); }
-if(!isset($SetupDir['setup'])) { $SetupDir['setup'] = "setup/"; }
-if(!isset($SetupDir['convert'])) { $SetupDir['convert'] = "setup/convert/"; }
-if ($_POST['License']!="Agree") { $Error="Yes";  ?>
+if ($File3Name == "presetup.php" || $File3Name == "/presetup.php") {
+    require('index.php');
+    exit();
+}
+if (!isset($SetupDir['setup'])) {
+    $SetupDir['setup'] = "setup/";
+}
+if (!isset($SetupDir['convert'])) {
+    $SetupDir['convert'] = "setup/convert/";
+}
+if ($_POST['License'] != "Agree") {
+    $Error = "Yes";  ?>
 <tr class="TableRow3">
 <td class="TableRow3">
 <span class="TableMessage">
 <br />You need to  agree to the tos.<br /></span>
 <?php }
-if($Error!="Yes") {
-?>
+if ($Error != "Yes") {
+    ?>
 <tr class="TableRow3">
 <td class="TableRow3">
 <form style="display: inline;" method="post" name="install" id="install" action="install.php?act=Part3">
@@ -42,7 +48,7 @@ if($Error!="Yes") {
 </tr><tr>
 	<td style="width: 50%;"><label class="TextBoxLabel" for="DatabaseHost">Insert Database Host:</label></td>
 	<td style="width: 50%;"><input type="text" name="DatabaseHost" class="TextBox" id="DatabaseHost" size="20" value="localhost" /></td>
-	<?php if($ConvertInfo['ConvertFile']!=null) { ?>
+	<?php if ($ConvertInfo['ConvertFile'] != null) { ?>
 </tr><tr>
 	<td style="width: 50%;"><label class="TextBoxLabel" for="SetupType">Type of install to do:</label></td>
 	<td style="width: 50%;"><select size="1" class="TextBox" name="SetupType" id="SetupType">
@@ -54,7 +60,7 @@ if($Error!="Yes") {
 <table style="text-align: left;">
 <tr style="text-align: left;">
 <td style="width: 100%;">
-<?php if($ConvertInfo['ConvertFile']==null) { ?>
+<?php if ($ConvertInfo['ConvertFile'] == null) { ?>
 <input type="hidden" name="SetupType" value="install" style="display: none;" />
 <?php } ?>
 <input type="hidden" name="act" value="Part3" style="display: none;" />

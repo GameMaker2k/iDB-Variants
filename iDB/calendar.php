@@ -15,7 +15,9 @@
 */
 require('preindex.php');
 $usefileext = $Settings['file_ext'];
-if($ext=="noext"||$ext=="no ext"||$ext=="no+ext") { $usefileext = ""; }
+if ($ext == "noext" || $ext == "no ext" || $ext == "no+ext") {
+    $usefileext = "";
+}
 $filewpath = $exfile['calendar'].$usefileext.$_SERVER['PATH_INFO'];
 ?>
 
@@ -25,18 +27,23 @@ $filewpath = $exfile['calendar'].$usefileext.$_SERVER['PATH_INFO'];
 <?php
 require($SettDir['inc'].'navbar.php');
 
-if($_GET['act']==null) {
-$_GET['act']="view"; }
-if($_GET['act']=="view")
-{ require($SettDir['inc'].'calendars.php'); }
-if($_GET['act']=="create") 
-{ require($SettDir['inc'].'events.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "view";
+}
+if ($_GET['act'] == "view") {
+    require($SettDir['inc'].'calendars.php');
+}
+if ($_GET['act'] == "create") {
+    require($SettDir['inc'].'events.php');
+}
 require($SettDir['inc'].'endpage.php'); ?>
 </body>
 </html>
 <?php
-if($_GET['act']=="view") {
-change_title($Settings['board_name']." ".$ThemeSet['TitleDivider']." Viewing Calendar",$Settings['use_gzip'],$GZipEncode['Type']); }
-if($_GET['act']=="create") {
-change_title($Settings['board_name']." ".$ThemeSet['TitleDivider']." Making a Event",$Settings['use_gzip'],$GZipEncode['Type']); }
+if ($_GET['act'] == "view") {
+    change_title($Settings['board_name']." ".$ThemeSet['TitleDivider']." Viewing Calendar", $Settings['use_gzip'], $GZipEncode['Type']);
+}
+if ($_GET['act'] == "create") {
+    change_title($Settings['board_name']." ".$ThemeSet['TitleDivider']." Making a Event", $Settings['use_gzip'], $GZipEncode['Type']);
+}
 ?>

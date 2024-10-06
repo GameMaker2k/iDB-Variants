@@ -15,25 +15,39 @@
     $FileInfo: setup.php - Last Update: 01/01/2008 SVN 144 - Author: cooldude2k $
 */
 $File3Name = basename($_SERVER['SCRIPT_NAME']);
-if ($File3Name=="setup.php"||$File3Name=="/setup.php") {
-	require('index.php');
-	exit(); }
-if(!isset($SetupDir['setup'])) { $SetupDir['setup'] = "signup/"; }
-if(!isset($SetupDir['convert'])) { $SetupDir['convert'] = null; }
+if ($File3Name == "setup.php" || $File3Name == "/setup.php") {
+    require('index.php');
+    exit();
+}
+if (!isset($SetupDir['setup'])) {
+    $SetupDir['setup'] = "signup/";
+}
+if (!isset($SetupDir['convert'])) {
+    $SetupDir['convert'] = null;
+}
 ?>
 <tr class="TableRow3">
 <td class="TableRow3">
 <?php
 require('settings.php');
-if(!isset($Settings['sqldb'])) { echo "<span class=\"TableMessage\">";
-	echo "<br />Sorry you can not signup yet.<br />\n</span>\n"; $Error="Yes"; }
-if($_POST['License']!="Agree") { echo "<span class=\"TableMessage\">";
-	echo "<br />You need to agree to the tos.<br />\n</span>\n"; $Error="Yes"; }
-$StatSQL = @mysql_connect($Settings['sqlhost'],$Settings['sqluser'],$Settings['sqlpass']);
-if(!$StatSQL) { $Error="Yes"; echo "<span class=\"TableMessage\">";
-echo "<br />".mysql_errno().": ".mysql_error()."<br />\n</span>\n"; }
-if ($Error!="Yes") {
-?>
+if (!isset($Settings['sqldb'])) {
+    echo "<span class=\"TableMessage\">";
+    echo "<br />Sorry you can not signup yet.<br />\n</span>\n";
+    $Error = "Yes";
+}
+if ($_POST['License'] != "Agree") {
+    echo "<span class=\"TableMessage\">";
+    echo "<br />You need to agree to the tos.<br />\n</span>\n";
+    $Error = "Yes";
+}
+$StatSQL = @mysql_connect($Settings['sqlhost'], $Settings['sqluser'], $Settings['sqlpass']);
+if (!$StatSQL) {
+    $Error = "Yes";
+    echo "<span class=\"TableMessage\">";
+    echo "<br />".mysql_errno().": ".mysql_error()."<br />\n</span>\n";
+}
+if ($Error != "Yes") {
+    ?>
 <form style="display: inline;" method="post" name="install" id="install" action="signup.php?act=Part3">
 <table style="text-align: left;">
 <tr style="text-align: left;">
@@ -63,47 +77,69 @@ if ($Error!="Yes") {
 </tr><tr>
 	<td style="width: 50%;"><label class="TextBoxLabel" for="YourOffSet">Your TimeZone:</label></td>
 	<td style="width: 50%;"><select id="YourOffSet" name="YourOffSet" class="TextBox"><?php
-if(date("I")!=1) { $myofftime = SeverOffSet(); $mydstime = "off"; }
-if(date("I")==1) { $myofftime = SeverOffSet()-1; $mydstime = "on"; }
-$plusi = 1; $minusi = 12;
-$plusnum = 13; $minusnum = 0;
-while ($minusi > $minusnum) {
-if($myofftime==-$minusi) {
-echo "<option selected=\"selected\" value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n"; }
-if($myofftime!=-$minusi) {
-echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n"; }
---$minusi; }
-if($myofftime==0) { ?>
+if (date("I") != 1) {
+    $myofftime = SeverOffSet();
+    $mydstime = "off";
+}
+    if (date("I") == 1) {
+        $myofftime = SeverOffSet() - 1;
+        $mydstime = "on";
+    }
+    $plusi = 1;
+    $minusi = 12;
+    $plusnum = 13;
+    $minusnum = 0;
+    while ($minusi > $minusnum) {
+        if ($myofftime == -$minusi) {
+            echo "<option selected=\"selected\" value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
+        }
+        if ($myofftime != -$minusi) {
+            echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
+        }
+        --$minusi;
+    }
+    if ($myofftime == 0) { ?>
 <option selected="selected" value="0">GMT +/- 0:00 hours</option>
-<?php } if($myofftime!=0) { ?>
+<?php } if ($myofftime != 0) { ?>
 <option value="0">GMT +/- 0:00 hours</option>
 <?php }
 while ($plusi < $plusnum) {
-if($myofftime==$plusi) {
-echo "<option selected=\"selected\" value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n"; }
-if($myofftime!=$plusi) {
-echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n"; }
-++$plusi; }
-?></select></td>
+    if ($myofftime == $plusi) {
+        echo "<option selected=\"selected\" value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
+    }
+    if ($myofftime != $plusi) {
+        echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
+    }
+    ++$plusi;
+}
+    ?></select></td>
 </tr><tr>
 	<td style="width: 50%;"><label class="TextBoxLabel" for="MinOffSet">Minute OffSet:</label></td>
 	<td style="width: 50%;"><select id="MinOffSet" name="MinOffSet" class="TextBox"><?php
-$mini = 0; $minnum = 60;
-while ($mini < $minnum) {
-if(strlen($mini)==2) { $showmin = $mini; }
-if(strlen($mini)==1) { $showmin = "0".$mini; }
-if($mini==0) {
-echo "\n<option selected=\"selected\" value=\"".$showmin."\">0:".$showmin." minutes</option>\n"; }
-if($mini!=0) {
-echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n"; }
-++$mini; }
-?></select></td>
+    $mini = 0;
+    $minnum = 60;
+    while ($mini < $minnum) {
+        if (strlen($mini) == 2) {
+            $showmin = $mini;
+        }
+        if (strlen($mini) == 1) {
+            $showmin = "0".$mini;
+        }
+        if ($mini == 0) {
+            echo "\n<option selected=\"selected\" value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
+        }
+        if ($mini != 0) {
+            echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
+        }
+        ++$mini;
+    }
+    ?></select></td>
 </tr><tr>
 	<td style="width: 50%;"><label class="TextBoxLabel" for="DST">Is <span title="Daylight Savings Time">DST</span> / <span title="Summer Time">ST</span> on or off:</label></td>
 	<td style="width: 50%;"><select id="DST" name="DST" class="TextBox"><?php echo "\n" ?>
-<?php if($mydstime=="off"||$mydstime!="on") { ?>
+<?php if ($mydstime == "off" || $mydstime != "on") { ?>
 <option selected="selected" value="off">off</option><?php echo "\n" ?><option value="on">on</option>
-<?php } if($mydstime=="on") { ?>
+<?php } if ($mydstime == "on") { ?>
 <option selected="selected" value="on">on</option><?php echo "\n" ?><option value="off">off</option>
 <?php } echo "\n" ?></select></td>
 </tr><tr>

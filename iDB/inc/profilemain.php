@@ -14,16 +14,23 @@
     $FileInfo: profilemain.php - Last Update: 04/10/2008 SVN 159 - Author: cooldude2k $
 */
 $File3Name = basename($_SERVER['SCRIPT_NAME']);
-if ($File3Name=="profilemain.php"||$File3Name=="/profilemain.php") {
-	require('index.php');
-	exit(); }
+if ($File3Name == "profilemain.php" || $File3Name == "/profilemain.php") {
+    require('index.php');
+    exit();
+}
 
 // Check if we can edit the profile
-if($_SESSION['UserGroup']==$Settings['GuestGroup']||$GroupInfo['CanEditProfile']=="no") {
-redirect("location",$basedir.url_maker($exfile['index'],$Settings['file_ext'],"act=view",$Settings['qstr'],$Settings['qsep'],$prexqstr['index'],$exqstr['index'],false));
-ob_clean(); @header("Content-Type: text/plain; charset=".$Settings['charset']);
-gzip_page($Settings['use_gzip'],$GZipEncode['Type']); @mysql_close(); die(); }
-if(!isset($_POST['update'])) { $_POST['update'] = null; }
+if ($_SESSION['UserGroup'] == $Settings['GuestGroup'] || $GroupInfo['CanEditProfile'] == "no") {
+    redirect("location", $basedir.url_maker($exfile['index'], $Settings['file_ext'], "act=view", $Settings['qstr'], $Settings['qsep'], $prexqstr['index'], $exqstr['index'], false));
+    ob_clean();
+    @header("Content-Type: text/plain; charset=".$Settings['charset']);
+    gzip_page($Settings['use_gzip'], $GZipEncode['Type']);
+    @mysql_close();
+    die();
+}
+if (!isset($_POST['update'])) {
+    $_POST['update'] = null;
+}
 ?>
 <table class="Table3">
 <tr style="width: 100%; vertical-align: top;">
@@ -34,13 +41,13 @@ if(!isset($_POST['update'])) { $_POST['update'] = null; }
 </tr><tr class="TableRow2">
 <td class="TableRow2">&nbsp;</td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=view",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Edit NotePad</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=view", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Edit NotePad</a></td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=profile",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Edit Profile</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=profile", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Edit Profile</a></td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=signature",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Edit Signature</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=signature", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Edit Signature</a></td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=avatar",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Edit Avatar</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=avatar", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Edit Avatar</a></td>
 </tr><tr class="TableRow4">
 <td class="TableRow4">&nbsp;</td>
 </tr></table><div>&nbsp;</div>
@@ -50,21 +57,21 @@ if(!isset($_POST['update'])) { $_POST['update'] = null; }
 </tr><tr class="TableRow2">
 <td class="TableRow2">&nbsp;</td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=settings",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Board Settings</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=settings", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Board Settings</a></td>
 </tr><tr class="TableRow3">
-<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'],$Settings['file_ext'],"act=userinfo",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']); ?>">Change User Info</a></td>
+<td class="TableRow3"><a href="<?php echo url_maker($exfile['profile'], $Settings['file_ext'], "act=userinfo", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']); ?>">Change User Info</a></td>
 </tr><tr class="TableRow4">
 <td class="TableRow4">&nbsp;</td>
 </tr></table>
 </td>
 	<td style="width: 85%; vertical-align: top;">
-<?php if($_POST['update']=="now"&&$_GET['act']!=null) {
-$updateact = url_maker($exfile['profile'],$Settings['file_ext'],"act=".$_GET['act'],$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." Updating Settings";
-@redirect("refresh",$basedir.url_maker($exfile['profile'],$Settings['file_ext'],"act=".$_GET['act'],$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile'],FALSE),"3");
-$noteact = url_maker($exfile['profile'],$Settings['file_ext'],"act=view",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." NotePad";
-?>
+<?php if ($_POST['update'] == "now" && $_GET['act'] != null) {
+    $updateact = url_maker($exfile['profile'], $Settings['file_ext'], "act=".$_GET['act'], $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+    $profiletitle = " ".$ThemeSet['TitleDivider']." Updating Settings";
+    @redirect("refresh", $basedir.url_maker($exfile['profile'], $Settings['file_ext'], "act=".$_GET['act'], $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile'], false), "3");
+    $noteact = url_maker($exfile['profile'], $Settings['file_ext'], "act=view", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+    $profiletitle = " ".$ThemeSet['TitleDivider']." NotePad";
+    ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -79,17 +86,18 @@ $profiletitle = " ".$ThemeSet['TitleDivider']." NotePad";
 <td class="TableRow3">
 <div style="text-align: center;">
 <br />Profile updated <a href="<?php echo $updateact; ?>">click here</a> to go back. ^_^<br />&nbsp;</div>
-<?php } if($_GET['act']=="view") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$Notes=mysql_result($result,$i,"Notes");
-$noteact = url_maker($exfile['profile'],$Settings['file_ext'],"act=view",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$notepadact = $noteact; $profiletitle = " ".$ThemeSet['TitleDivider']." NotePad";
-?>
+<?php } if ($_GET['act'] == "view") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $Notes = mysql_result($result, $i, "Notes");
+        $noteact = url_maker($exfile['profile'], $Settings['file_ext'], "act=view", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $notepadact = $noteact;
+        $profiletitle = " ".$ThemeSet['TitleDivider']." NotePad";
+        ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -115,57 +123,78 @@ $notepadact = $noteact; $profiletitle = " ".$ThemeSet['TitleDivider']." NotePad"
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['act']=="view"&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	$_POST['NotePad'] = htmlspecialchars($_POST['NotePad'], ENT_QUOTES, $Settings['charset']);
-	$_POST['NotePad'] = remove_bad_entities($_POST['NotePad']);
-	//$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
-	//$_POST['Signature'] = @remove_spaces($_POST['Signature']);
-	//$_POST['Signature'] = remove_bad_entities($_POST['Signature']);
-	/*    <_<  iWordFilter  >_>      
-    by René Johnson - Cool Dude 2k */
-	$katarzynaqy=query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
-	$katarzynart=mysql_query($katarzynaqy);
-	$katarzynanm=mysql_num_rows($katarzynart);
-	$katarzynas=0;
-	while ($katarzynas < $katarzynanm) {
-	$Filter=mysql_result($katarzynart,$katarzynas,"Filter");
-	$Replace=mysql_result($katarzynart,$katarzynas,"Replace");
-	$CaseInsensitive=mysql_result($katarzynart,$katarzynas,"CaseInsensitive");
-	if($CaseInsensitive=="on") { $CaseInsensitive = "yes"; }
-	if($CaseInsensitive=="off") { $CaseInsensitive = "no"; }
-	if($CaseInsensitive!="yes"||$CaseInsensitive!="no") { $CaseInsensitive = "no"; }
-	$WholeWord=mysql_result($katarzynart,$katarzynas,"WholeWord");
-	if($WholeWord=="on") { $WholeWord = "yes"; }
-	if($WholeWord=="off") { $WholeWord = "no"; }
-	if($WholeWord!="yes"||$WholeWord!="no") { $WholeWord = "no"; }
-	$Filter = preg_quote($Filter, "/");
-	if($CaseInsensitive!="yes"&&$WholeWord=="yes") {
-	$_POST['NotePad'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['NotePad']); }
-	if($CaseInsensitive=="yes"&&$WholeWord=="yes") {
-	$_POST['NotePad'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['NotePad']); }
-	if($CaseInsensitive!="yes"&&$WholeWord!="yes") {
-	$_POST['NotePad'] = preg_replace("/".$Filter."/", $Replace, $_POST['NotePad']); }
-	if($CaseInsensitive=="yes"&&$WholeWord!="yes") {
-	$_POST['NotePad'] = preg_replace("/".$Filter."/i", $Replace, $_POST['NotePad']); }
-	++$katarzynas; } @mysql_free_result($katarzynart);
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	$querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Notes`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['NotePad'],$NewDay,$NewIP,$_SESSION['UserID']));
-		mysql_query($querynewskin); } } }
-if($_GET['act']=="signature") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$Signature=mysql_result($result,$i,"Signature"); 
-$signatureact = url_maker($exfile['profile'],$Settings['file_ext'],"act=signature",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." Signature Editor";
-?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['act'] == "view" &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            $_POST['NotePad'] = htmlspecialchars($_POST['NotePad'], ENT_QUOTES, $Settings['charset']);
+            $_POST['NotePad'] = remove_bad_entities($_POST['NotePad']);
+            //$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
+            //$_POST['Signature'] = @remove_spaces($_POST['Signature']);
+            //$_POST['Signature'] = remove_bad_entities($_POST['Signature']);
+            /*    <_<  iWordFilter  >_>
+            by René Johnson - Cool Dude 2k */
+            $katarzynaqy = query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
+            $katarzynart = mysql_query($katarzynaqy);
+            $katarzynanm = mysql_num_rows($katarzynart);
+            $katarzynas = 0;
+            while ($katarzynas < $katarzynanm) {
+                $Filter = mysql_result($katarzynart, $katarzynas, "Filter");
+                $Replace = mysql_result($katarzynart, $katarzynas, "Replace");
+                $CaseInsensitive = mysql_result($katarzynart, $katarzynas, "CaseInsensitive");
+                if ($CaseInsensitive == "on") {
+                    $CaseInsensitive = "yes";
+                }
+                if ($CaseInsensitive == "off") {
+                    $CaseInsensitive = "no";
+                }
+                if ($CaseInsensitive != "yes" || $CaseInsensitive != "no") {
+                    $CaseInsensitive = "no";
+                }
+                $WholeWord = mysql_result($katarzynart, $katarzynas, "WholeWord");
+                if ($WholeWord == "on") {
+                    $WholeWord = "yes";
+                }
+                if ($WholeWord == "off") {
+                    $WholeWord = "no";
+                }
+                if ($WholeWord != "yes" || $WholeWord != "no") {
+                    $WholeWord = "no";
+                }
+                $Filter = preg_quote($Filter, "/");
+                if ($CaseInsensitive != "yes" && $WholeWord == "yes") {
+                    $_POST['NotePad'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['NotePad']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord == "yes") {
+                    $_POST['NotePad'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['NotePad']);
+                }
+                if ($CaseInsensitive != "yes" && $WholeWord != "yes") {
+                    $_POST['NotePad'] = preg_replace("/".$Filter."/", $Replace, $_POST['NotePad']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord != "yes") {
+                    $_POST['NotePad'] = preg_replace("/".$Filter."/i", $Replace, $_POST['NotePad']);
+                }
+                ++$katarzynas;
+            } @mysql_free_result($katarzynart);
+            $NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            $querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Notes`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['NotePad'],$NewDay,$NewIP,$_SESSION['UserID']));
+            mysql_query($querynewskin);
+        }
+    }
+}
+if ($_GET['act'] == "signature") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $Signature = mysql_result($result, $i, "Signature");
+        $signatureact = url_maker($exfile['profile'], $Settings['file_ext'], "act=signature", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $profiletitle = " ".$ThemeSet['TitleDivider']." Signature Editor";
+        ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -191,65 +220,90 @@ $profiletitle = " ".$ThemeSet['TitleDivider']." Signature Editor";
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['act']=="signature"&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	$_POST['Signature'] = stripcslashes(htmlspecialchars($_POST['Signature'], ENT_QUOTES));
-	//$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
-	//$_POST['Signature'] = @remove_spaces($_POST['Signature']);
-	$_POST['Signature'] = remove_bad_entities($_POST['Signature']);
-	/*    <_<  iWordFilter  >_>      
-    by René Johnson - Cool Dude 2k */
-	$katarzynaqy=query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
-	$katarzynart=mysql_query($katarzynaqy);
-	$katarzynanm=mysql_num_rows($katarzynart);
-	$katarzynas=0;
-	while ($katarzynas < $katarzynanm) {
-	$Filter=mysql_result($katarzynart,$katarzynas,"Filter");
-	$Replace=mysql_result($katarzynart,$katarzynas,"Replace");
-	$CaseInsensitive=mysql_result($katarzynart,$katarzynas,"CaseInsensitive");
-	if($CaseInsensitive=="on") { $CaseInsensitive = "yes"; }
-	if($CaseInsensitive=="off") { $CaseInsensitive = "no"; }
-	if($CaseInsensitive!="yes"||$CaseInsensitive!="no") { $CaseInsensitive = "no"; }
-	$WholeWord=mysql_result($katarzynart,$katarzynas,"WholeWord");
-	if($WholeWord=="on") { $WholeWord = "yes"; }
-	if($WholeWord=="off") { $WholeWord = "no"; }
-	if($WholeWord!="yes"||$WholeWord!="no") { $WholeWord = "no"; }
-	$Filter = preg_quote($Filter, "/");
-	if($CaseInsensitive!="yes"&&$WholeWord=="yes") {
-	$_POST['Signature'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Signature']); }
-	if($CaseInsensitive=="yes"&&$WholeWord=="yes") {
-	$_POST['Signature'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Signature']); }
-	if($CaseInsensitive!="yes"&&$WholeWord!="yes") {
-	$_POST['Signature'] = preg_replace("/".$Filter."/", $Replace, $_POST['Signature']); }
-	if($CaseInsensitive=="yes"&&$WholeWord!="yes") {
-	$_POST['Signature'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Signature']); }
-	++$katarzynas; } @mysql_free_result($katarzynart);
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	$querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Signature`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Signature'],$NewDay,$NewIP,$_SESSION['UserID']));
-	mysql_query($querynewskin); } } }
-if($_GET['act']=="avatar") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$User1Avatar=mysql_result($result,$i,"Avatar"); 
-$User1AvatarSize=mysql_result($result,$i,"AvatarSize");
-$avataract = url_maker($exfile['profile'],$Settings['file_ext'],"act=avatar",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." Avatar Editor";
-$Pre1Avatar = $User1Avatar;
-if ($User1Avatar==null) { $User1Avatar="http://"; }
-if ($Pre1Avatar=="http://"||$Pre1Avatar==null||
-	strtolower($Pre1Avatar)=="noavatar") {
-$Pre1Avatar=$ThemeSet['NoAvatar'];
-$User1AvatarSize=$ThemeSet['NoAvatarSize']; }
-$AvatarSize1=explode("x", $User1AvatarSize);
-$AvatarSize1W=$AvatarSize1[0]; $AvatarSize1H=$AvatarSize1[1];
-?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['act'] == "signature" &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            $_POST['Signature'] = stripcslashes(htmlspecialchars($_POST['Signature'], ENT_QUOTES));
+            //$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
+            //$_POST['Signature'] = @remove_spaces($_POST['Signature']);
+            $_POST['Signature'] = remove_bad_entities($_POST['Signature']);
+            /*    <_<  iWordFilter  >_>
+            by René Johnson - Cool Dude 2k */
+            $katarzynaqy = query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
+            $katarzynart = mysql_query($katarzynaqy);
+            $katarzynanm = mysql_num_rows($katarzynart);
+            $katarzynas = 0;
+            while ($katarzynas < $katarzynanm) {
+                $Filter = mysql_result($katarzynart, $katarzynas, "Filter");
+                $Replace = mysql_result($katarzynart, $katarzynas, "Replace");
+                $CaseInsensitive = mysql_result($katarzynart, $katarzynas, "CaseInsensitive");
+                if ($CaseInsensitive == "on") {
+                    $CaseInsensitive = "yes";
+                }
+                if ($CaseInsensitive == "off") {
+                    $CaseInsensitive = "no";
+                }
+                if ($CaseInsensitive != "yes" || $CaseInsensitive != "no") {
+                    $CaseInsensitive = "no";
+                }
+                $WholeWord = mysql_result($katarzynart, $katarzynas, "WholeWord");
+                if ($WholeWord == "on") {
+                    $WholeWord = "yes";
+                }
+                if ($WholeWord == "off") {
+                    $WholeWord = "no";
+                }
+                if ($WholeWord != "yes" || $WholeWord != "no") {
+                    $WholeWord = "no";
+                }
+                $Filter = preg_quote($Filter, "/");
+                if ($CaseInsensitive != "yes" && $WholeWord == "yes") {
+                    $_POST['Signature'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Signature']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord == "yes") {
+                    $_POST['Signature'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Signature']);
+                }
+                if ($CaseInsensitive != "yes" && $WholeWord != "yes") {
+                    $_POST['Signature'] = preg_replace("/".$Filter."/", $Replace, $_POST['Signature']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord != "yes") {
+                    $_POST['Signature'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Signature']);
+                }
+                ++$katarzynas;
+            } @mysql_free_result($katarzynart);
+            $NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            $querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Signature`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Signature'],$NewDay,$NewIP,$_SESSION['UserID']));
+            mysql_query($querynewskin);
+        }
+    }
+}
+if ($_GET['act'] == "avatar") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $User1Avatar = mysql_result($result, $i, "Avatar");
+        $User1AvatarSize = mysql_result($result, $i, "AvatarSize");
+        $avataract = url_maker($exfile['profile'], $Settings['file_ext'], "act=avatar", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $profiletitle = " ".$ThemeSet['TitleDivider']." Avatar Editor";
+        $Pre1Avatar = $User1Avatar;
+        if ($User1Avatar == null) {
+            $User1Avatar = "http://";
+        }
+        if ($Pre1Avatar == "http://" || $Pre1Avatar == null ||
+            strtolower($Pre1Avatar) == "noavatar") {
+            $Pre1Avatar = $ThemeSet['NoAvatar'];
+            $User1AvatarSize = $ThemeSet['NoAvatarSize'];
+        }
+        $AvatarSize1 = explode("x", $User1AvatarSize);
+        $AvatarSize1W = $AvatarSize1[0];
+        $AvatarSize1H = $AvatarSize1[1];
+        ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -278,12 +332,20 @@ $AvatarSize1W=$AvatarSize1[0]; $AvatarSize1H=$AvatarSize1[1];
 	</tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="AvatarSizeW">Avatar Width</label></td>
 	<td style="width: 60%;"><select size="1" name="AvatarSizeW" id="AvatarSizeW" class="TextBox">
-	<option value="<?php echo $AvatarSize1W; ?>" selected="selected"><?php echo $AvatarSize1W; ?></option><?php echo "\n"; $r=1; while ($r <= 100) { ?><option value="<?php echo $r ?>"><?php echo $r; ?></option><?php echo "\n"; ++$r; } ?>
+	<option value="<?php echo $AvatarSize1W; ?>" selected="selected"><?php echo $AvatarSize1W; ?></option><?php echo "\n";
+        $r = 1;
+        while ($r <= 100) { ?><option value="<?php echo $r ?>"><?php echo $r; ?></option><?php echo "\n";
+            ++$r;
+        } ?>
 </select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="AvatarSizeH">Avatar Height</label></td>
 	<td style="width: 60%;"><select size="1" name="AvatarSizeH" id="AvatarSizeH" class="TextBox">
-<option value="<?php echo $AvatarSize1H; ?>" selected="selected"><?php echo $AvatarSize1H; ?></option><?php echo "\n"; $s=1; while ($s <= 100) { ?><option value="<?php echo $s ?>"><?php echo $s; ?></option><?php echo "\n"; ++$s; } ?>
+<option value="<?php echo $AvatarSize1H; ?>" selected="selected"><?php echo $AvatarSize1H; ?></option><?php echo "\n";
+        $s = 1;
+        while ($s <= 100) { ?><option value="<?php echo $s ?>"><?php echo $s; ?></option><?php echo "\n";
+            ++$s;
+        } ?>
 </select></td>
 </tr></table>
 <table style="text-align: left;">
@@ -301,32 +363,40 @@ $AvatarSize1W=$AvatarSize1[0]; $AvatarSize1H=$AvatarSize1[1];
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['Avatar']!=null&&$_POST['AvatarSizeW']!=null&&$_POST['AvatarSizeH']!=null&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	if($_POST['AvatarSizeW']>=100) { $_POST['AvatarSizeW']=100; }
-	if($_POST['AvatarSizeH']>=100) { $_POST['AvatarSizeH']=100; }
-	$fullavatarsize = $_POST['AvatarSizeW']."x".$_POST['AvatarSizeH'];
-	$_POST['Avatar'] = htmlentities($_POST['Avatar'], ENT_QUOTES, $Settings['charset']);
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	$_POST['Avatar'] = @remove_spaces($_POST['Avatar']);
-	$querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Avatar`='%s',`AvatarSize`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Avatar'],$fullavatarsize,$NewDay,$NewIP,$_SESSION['UserID']));
-	mysql_query($querynewskin); } } }
-if($_GET['act']=="settings") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$User1TimeZone=mysql_result($result,$i,"TimeZone"); 
-$tsa_mem = explode(":",$User1TimeZone);
-$TimeZoneArray = array("offset" => $User1TimeZone, "hour" => $tsa_mem[0], "minute" => $tsa_mem[1]);
-$User1DST=mysql_result($result,$i,"DST");
-$settingsact = url_maker($exfile['profile'],$Settings['file_ext'],"act=settings",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." Board Settings"; ?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['Avatar'] != null && $_POST['AvatarSizeW'] != null && $_POST['AvatarSizeH'] != null &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            if ($_POST['AvatarSizeW'] >= 100) {
+                $_POST['AvatarSizeW'] = 100;
+            }
+            if ($_POST['AvatarSizeH'] >= 100) {
+                $_POST['AvatarSizeH'] = 100;
+            }
+            $fullavatarsize = $_POST['AvatarSizeW']."x".$_POST['AvatarSizeH'];
+            $_POST['Avatar'] = htmlentities($_POST['Avatar'], ENT_QUOTES, $Settings['charset']);
+            $NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            $_POST['Avatar'] = @remove_spaces($_POST['Avatar']);
+            $querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `Avatar`='%s',`AvatarSize`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Avatar'],$fullavatarsize,$NewDay,$NewIP,$_SESSION['UserID']));
+            mysql_query($querynewskin);
+        }
+    }
+}
+if ($_GET['act'] == "settings") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $User1TimeZone = mysql_result($result, $i, "TimeZone");
+        $tsa_mem = explode(":", $User1TimeZone);
+        $TimeZoneArray = array("offset" => $User1TimeZone, "hour" => $tsa_mem[0], "minute" => $tsa_mem[1]);
+        $User1DST = mysql_result($result, $i, "DST");
+        $settingsact = url_maker($exfile['profile'], $Settings['file_ext'], "act=settings", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $profiletitle = " ".$ThemeSet['TitleDivider']." Board Settings"; ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -346,55 +416,74 @@ $profiletitle = " ".$ThemeSet['TitleDivider']." Board Settings"; ?>
 	<td style="width: 60%;"><select id="YourOffSet" name="YourOffSet" class="TextBox">
 <option selected="selected" value="<?php echo $TimeZoneArray['hour']; ?>">Old Value (<?php echo $TimeZoneArray['hour'].":00 hours"; ?>)</option>
 <?php
-$plusi = 1; $minusi = 12;
-$plusnum = 13; $minusnum = 0;
-while ($minusi > $minusnum) {
-echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
---$minusi; }
-?>
+        $plusi = 1;
+        $minusi = 12;
+        $plusnum = 13;
+        $minusnum = 0;
+        while ($minusi > $minusnum) {
+            echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
+            --$minusi;
+        }
+        ?>
 <option value="0">GMT +/- 0:00 hours</option>
 <?php
 while ($plusi < $plusnum) {
-echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
-++$plusi; }
-?></select></td>
+    echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
+    ++$plusi;
+}
+        ?></select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="MinOffSet">Minute OffSet:</label></td>
 	<td style="width: 60%;"><select id="MinOffSet" name="MinOffSet" class="TextBox">
 <option selected="selected" value="<?php echo $TimeZoneArray['minute']; ?>">Old Value (<?php echo "0:".$TimeZoneArray['minute']." minutes"; ?>)</option>
 <?php
-$mini = 0; $minnum = 60;
-while ($mini < $minnum) {
-if(pre_strlen($mini)==2) { $showmin = $mini; }
-if(pre_strlen($mini)==1) { $showmin = "0".$mini; }
-echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
-++$mini; }
-?></select></td>
+        $mini = 0;
+        $minnum = 60;
+        while ($mini < $minnum) {
+            if (pre_strlen($mini) == 2) {
+                $showmin = $mini;
+            }
+            if (pre_strlen($mini) == 1) {
+                $showmin = "0".$mini;
+            }
+            echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
+            ++$mini;
+        }
+        ?></select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="skin">Pick a CSS Theme</label></td>
 	<td style="width: 60%;"><select id="skin" name="skin" class="TextBox">
 <option selected="selected" value="<?php echo $_SESSION['Theme']; ?>">Old Value (<?php echo $_SESSION['Theme']; ?>)</option><?php
-$skindir = dirname(realpath("settings.php"))."/".$SettDir['themes'];
-if ($handle = opendir($skindir)) { $dirnum = null;
-   while (false !== ($file = readdir($handle))) {
-	   if ($dirnum==null) { $dirnum = 0; }
-	   if (file_exists($skindir.$file."/info.php")) {
-		   if ($file != "." && $file != "..") {
-	   include($skindir.$file."/info.php");
-       $themelist[$dirnum] =  "<option value=\"".$file."\">".$ThemeInfo['ThemeName']."</option>";
-	   ++$dirnum; } } }
-   closedir($handle); asort($themelist);
-   $themenum=count($themelist); $themei=0; 
-   while ($themei < $themenum) {
-   echo $themelist[$themei]."\n";
-   ++$themei; }
-} ?></select></td>
+        $skindir = dirname(realpath("settings.php"))."/".$SettDir['themes'];
+        if ($handle = opendir($skindir)) {
+            $dirnum = null;
+            while (false !== ($file = readdir($handle))) {
+                if ($dirnum == null) {
+                    $dirnum = 0;
+                }
+                if (file_exists($skindir.$file."/info.php")) {
+                    if ($file != "." && $file != "..") {
+                        include($skindir.$file."/info.php");
+                        $themelist[$dirnum] =  "<option value=\"".$file."\">".$ThemeInfo['ThemeName']."</option>";
+                        ++$dirnum;
+                    }
+                }
+            }
+            closedir($handle);
+            asort($themelist);
+            $themenum = count($themelist);
+            $themei = 0;
+            while ($themei < $themenum) {
+                echo $themelist[$themei]."\n";
+                ++$themei;
+            }
+        } ?></select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="DST">Is <span title="Daylight Savings Time">DST</span> / <span title="Summer Time">ST</span> on or off:</label></td>
 	<td style="width: 60%;"><select id="DST" name="DST" class="TextBox"><?php echo "\n" ?>
-<?php if($User1DST=="off"||$User1DST!="on") { ?>
+<?php if ($User1DST == "off" || $User1DST != "on") { ?>
 <option selected="selected" value="off">off</option><?php echo "\n" ?><option value="on">on</option>
-<?php } if($User1DST=="on") { ?>
+<?php } if ($User1DST == "on") { ?>
 <option selected="selected" value="on">on</option><?php echo "\n" ?><option value="off">off</option>
 <?php } echo "\n" ?></select></td>
 </tr></table>
@@ -413,55 +502,85 @@ if ($handle = opendir($skindir)) { $dirnum = null;
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['act']=="settings"&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	if(!is_numeric($_POST['YourOffSet'])) { $_POST['YourOffSet'] = "0"; }
-	if($_POST['YourOffSet']>12) { $_POST['YourOffSet'] = "12"; }
-	if($_POST['YourOffSet']<-12) { $_POST['YourOffSet'] = "-12"; }
-	if(!is_numeric($_POST['MinOffSet'])) { $_POST['MinOffSet'] = "00"; }
-	if($_POST['MinOffSet']>59) { $_POST['MinOffSet'] = "59"; }
-	if($_POST['MinOffSet']<0) { $_POST['MinOffSet'] = "00"; }
-	$_POST['YourOffSet'] = $_POST['YourOffSet'].":".$_POST['MinOffSet'];
-	$_SESSION['UserTimeZone'] = $_POST['YourOffSet'];
-	$_SESSION['UserDST'] = $_POST['DST'];
-	$querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `UseTheme`='%s',`TimeZone`='%s',`DST`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['skin'],$_POST['YourOffSet'],$_POST['DST'],$NewDay,$NewIP,$_SESSION['UserID']));
-	mysql_query($querynewskin); } } }
-if($_GET['act']=="profile") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$User1Interests=mysql_result($result,$i,"Interests"); 
-$User1Title=mysql_result($result,$i,"Title");
-$User1Website=mysql_result($result,$i,"Website"); 
-$User1Gender=mysql_result($result,$i,"Gender");
-$User1TimeZone=mysql_result($result,$i,"TimeZone");
-$BirthDay=mysql_result($result,$i,"BirthDay");
-$BirthMonth=mysql_result($result,$i,"BirthMonth");
-$BirthYear=mysql_result($result,$i,"BirthYear");
-$User1Birthday = "MM/DD/YYYY";
-if($BirthMonth!=null&&$BirthDay!=null&&$BirthYear!=null) { 
-	if($BirthYear=="0") { $BirthYear = "YYYY"; }
-	if($BirthDay=="0") { $BirthDay = "DD"; }
-	if($BirthMonth=="0") { $BirthMonth = "MM"; }
-	if(pre_strlen($BirthMonth)=="1") { $BirthMonth = "0".$BirthMonth; }
-	if(pre_strlen($BirthDay)=="1") { $BirthDay = "0".$BirthDay; }
-    if($BirthYear!="MM"&&$BirthYear!="DD"&&$BirthYear!="YYYY"&&
-	checkdate($BirthMonth,$BirthDay,$BirthYear)==false) {
-	$BirthMonth = "MM"; $BirthDay = "DD"; $BirthYear = "YYYY"; }
-	$User1Birthday = $BirthMonth."/".$BirthDay."/".$BirthYear; }
-$tsa_mem = explode(":",$User1TimeZone);
-$TimeZoneArray = array("offset" => $User1TimeZone, "hour" => $tsa_mem[0], "minute" => $tsa_mem[1]);
-$User1DST=mysql_result($result,$i,"DST");
-$profileact = url_maker($exfile['profile'],$Settings['file_ext'],"act=profile",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." Profile Editor";
-?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['act'] == "settings" &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            $NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            if (!is_numeric($_POST['YourOffSet'])) {
+                $_POST['YourOffSet'] = "0";
+            }
+            if ($_POST['YourOffSet'] > 12) {
+                $_POST['YourOffSet'] = "12";
+            }
+            if ($_POST['YourOffSet'] < -12) {
+                $_POST['YourOffSet'] = "-12";
+            }
+            if (!is_numeric($_POST['MinOffSet'])) {
+                $_POST['MinOffSet'] = "00";
+            }
+            if ($_POST['MinOffSet'] > 59) {
+                $_POST['MinOffSet'] = "59";
+            }
+            if ($_POST['MinOffSet'] < 0) {
+                $_POST['MinOffSet'] = "00";
+            }
+            $_POST['YourOffSet'] = $_POST['YourOffSet'].":".$_POST['MinOffSet'];
+            $_SESSION['UserTimeZone'] = $_POST['YourOffSet'];
+            $_SESSION['UserDST'] = $_POST['DST'];
+            $querynewskin = query("UPDATE `".$Settings['sqltable']."members` SET `UseTheme`='%s',`TimeZone`='%s',`DST`='%s',`LastActive`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['skin'],$_POST['YourOffSet'],$_POST['DST'],$NewDay,$NewIP,$_SESSION['UserID']));
+            mysql_query($querynewskin);
+        }
+    }
+}
+if ($_GET['act'] == "profile") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $User1Interests = mysql_result($result, $i, "Interests");
+        $User1Title = mysql_result($result, $i, "Title");
+        $User1Website = mysql_result($result, $i, "Website");
+        $User1Gender = mysql_result($result, $i, "Gender");
+        $User1TimeZone = mysql_result($result, $i, "TimeZone");
+        $BirthDay = mysql_result($result, $i, "BirthDay");
+        $BirthMonth = mysql_result($result, $i, "BirthMonth");
+        $BirthYear = mysql_result($result, $i, "BirthYear");
+        $User1Birthday = "MM/DD/YYYY";
+        if ($BirthMonth != null && $BirthDay != null && $BirthYear != null) {
+            if ($BirthYear == "0") {
+                $BirthYear = "YYYY";
+            }
+            if ($BirthDay == "0") {
+                $BirthDay = "DD";
+            }
+            if ($BirthMonth == "0") {
+                $BirthMonth = "MM";
+            }
+            if (pre_strlen($BirthMonth) == "1") {
+                $BirthMonth = "0".$BirthMonth;
+            }
+            if (pre_strlen($BirthDay) == "1") {
+                $BirthDay = "0".$BirthDay;
+            }
+            if ($BirthYear != "MM" && $BirthYear != "DD" && $BirthYear != "YYYY" &&
+            checkdate($BirthMonth, $BirthDay, $BirthYear) == false) {
+                $BirthMonth = "MM";
+                $BirthDay = "DD";
+                $BirthYear = "YYYY";
+            }
+            $User1Birthday = $BirthMonth."/".$BirthDay."/".$BirthYear;
+        }
+        $tsa_mem = explode(":", $User1TimeZone);
+        $TimeZoneArray = array("offset" => $User1TimeZone, "hour" => $tsa_mem[0], "minute" => $tsa_mem[1]);
+        $User1DST = mysql_result($result, $i, "DST");
+        $profileact = url_maker($exfile['profile'], $Settings['file_ext'], "act=profile", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $profiletitle = " ".$ThemeSet['TitleDivider']." Profile Editor";
+        ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -493,30 +612,40 @@ $profiletitle = " ".$ThemeSet['TitleDivider']." Profile Editor";
 	<td style="width: 60%;"><select id="YourOffSet" name="YourOffSet" class="TextBox">
 <option selected="selected" value="<?php echo $TimeZoneArray['hour']; ?>">Old Value (<?php echo $TimeZoneArray['hour'].":00 hours"; ?>)</option>
 <?php
-$plusi = 1; $minusi = 12;
-$plusnum = 13; $minusnum = 0;
-while ($minusi > $minusnum) {
-echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
---$minusi; }
-?>
+        $plusi = 1;
+        $minusi = 12;
+        $plusnum = 13;
+        $minusnum = 0;
+        while ($minusi > $minusnum) {
+            echo "<option value=\"-".$minusi."\">GMT - ".$minusi.":00 hours</option>\n";
+            --$minusi;
+        }
+        ?>
 <option value="0">GMT +/- 0:00 hours</option>
 <?php
 while ($plusi < $plusnum) {
-echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
-++$plusi; }
-?></select></td>
+    echo "<option value=\"".$plusi."\">GMT + ".$plusi.":00 hours</option>\n";
+    ++$plusi;
+}
+        ?></select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="MinOffSet">Minute OffSet:</label></td>
 	<td style="width: 60%;"><select id="MinOffSet" name="MinOffSet" class="TextBox">
 <option selected="selected" value="<?php echo $TimeZoneArray['minute']; ?>">Old Value (<?php echo "0:".$TimeZoneArray['minute']." minutes"; ?>)</option>
 <?php
-$mini = 0; $minnum = 60;
-while ($mini < $minnum) {
-if(pre_strlen($mini)==2) { $showmin = $mini; }
-if(pre_strlen($mini)==1) { $showmin = "0".$mini; }
-echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
-++$mini; }
-?></select></td>
+        $mini = 0;
+        $minnum = 60;
+        while ($mini < $minnum) {
+            if (pre_strlen($mini) == 2) {
+                $showmin = $mini;
+            }
+            if (pre_strlen($mini) == 1) {
+                $showmin = "0".$mini;
+            }
+            echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
+            ++$mini;
+        }
+        ?></select></td>
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="YourGender">Your Gender:</label></td>
 	<td style="width: 60%;"><select id="YourGender" name="YourGender" class="TextBox">
@@ -528,9 +657,9 @@ echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
 </tr><tr style="text-align: left;">
 	<td style="width: 40%;"><label class="TextBoxLabel" for="DST">Is <span title="Daylight Savings Time">DST</span> / <span title="Summer Time">ST</span> on or off:</label></td>
 	<td style="width: 60%;"><select id="DST" name="DST" class="TextBox"><?php echo "\n" ?>
-<?php if($User1DST=="off"||$User1DST!="on") { ?>
+<?php if ($User1DST == "off" || $User1DST != "on") { ?>
 <option selected="selected" value="off">off</option><?php echo "\n" ?><option value="on">on</option>
-<?php } if($User1DST=="on") { ?>
+<?php } if ($User1DST == "on") { ?>
 <option selected="selected" value="on">on</option><?php echo "\n" ?><option value="off">off</option>
 <?php } echo "\n" ?></select></td>
 </tr></table>
@@ -549,100 +678,169 @@ echo "<option value=\"".$showmin."\">0:".$showmin." minutes</option>\n";
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['act']=="profile"&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	$_POST['Interests'] = htmlspecialchars($_POST['Interests'], ENT_QUOTES, $Settings['charset']);
-	$_POST['Interests'] = @remove_spaces($_POST['Interests']);
-	$_POST['Title'] = htmlspecialchars($_POST['Title'], ENT_QUOTES, $Settings['charset']);
-	$_POST['Title'] = @remove_spaces($_POST['Title']);
-	$_POST['Website'] = htmlentities($_POST['Website'], ENT_QUOTES, $Settings['charset']);
-	$_POST['Website'] = @remove_spaces($_POST['Website']);
-	//$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
-	//$_POST['Signature'] = @remove_spaces($_POST['Signature']);
-	//$_POST['Signature'] = remove_bad_entities($_POST['Signature']);
-	/*    <_<  iWordFilter  >_>      
-    by René Johnson - Cool Dude 2k */
-	$katarzynaqy=query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
-	$katarzynart=mysql_query($katarzynaqy);
-	$katarzynanm=mysql_num_rows($katarzynart);
-	$katarzynas=0;
-	while ($katarzynas < $katarzynanm) {
-	$Filter=mysql_result($katarzynart,$katarzynas,"Filter");
-	$Replace=mysql_result($katarzynart,$katarzynas,"Replace");
-	$CaseInsensitive=mysql_result($katarzynart,$katarzynas,"CaseInsensitive");
-	if($CaseInsensitive=="on") { $CaseInsensitive = "yes"; }
-	if($CaseInsensitive=="off") { $CaseInsensitive = "no"; }
-	if($CaseInsensitive!="yes"||$CaseInsensitive!="no") { $CaseInsensitive = "no"; }
-	$WholeWord=mysql_result($katarzynart,$katarzynas,"WholeWord");
-	if($WholeWord=="on") { $WholeWord = "yes"; }
-	if($WholeWord=="off") { $WholeWord = "no"; }
-	if($WholeWord!="yes"||$WholeWord!="no") { $WholeWord = "no"; }
-	$Filter = preg_quote($Filter, "/");
-	if($CaseInsensitive!="yes"&&$WholeWord=="yes") {
-	$_POST['Interests'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Interests']);
-	$_POST['Title'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Title']); }
-	if($CaseInsensitive=="yes"&&$WholeWord=="yes") {
-	$_POST['Interests'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Interests']);
-	$_POST['Title'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Title']); }
-	if($CaseInsensitive!="yes"&&$WholeWord!="yes") {
-	$_POST['Interests'] = preg_replace("/".$Filter."/", $Replace, $_POST['Interests']);
-	$_POST['Title'] = preg_replace("/".$Filter."/", $Replace, $_POST['Title']); }
-	if($CaseInsensitive=="yes"&&$WholeWord!="yes") {
-	$_POST['Interests'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Interests']); 
-	$_POST['Title'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Title']); }
-	++$katarzynas; } @mysql_free_result($katarzynart);
-	if(!isset($_POST['EventDay'])) { $_POST['EventDay'] = null; }
-	if($_POST['EventDay']!=null) {
-	$BirthExpl = explode("/",$_POST['EventDay']);
-	if(count($BirthExpl)!="3") { 
-	$BirthExpl[0] = "0"; $BirthExpl[1] = "0"; $BirthExpl[2] = "0"; }
-	if(!is_numeric($BirthExpl[0])) { $BirthExpl[0] = "0"; }
-	if(!is_numeric($BirthExpl[1])) { $BirthExpl[1] = "0"; }
-	if(!is_numeric($BirthExpl[2])) { $BirthExpl[2] = "0"; }
-	if(count($BirthExpl)=="3"&&checkdate($BirthExpl[0],$BirthExpl[1],$BirthExpl[2])==true) {
-	if(is_numeric($BirthExpl[0])&&is_numeric($BirthExpl[1])&&is_numeric($BirthExpl[2])) {
-	if(pre_strlen($BirthExpl[0])=="1") { $BirthExpl[0] = "0".$BirthExpl[0]; }
-	if(pre_strlen($BirthExpl[1])=="1") { $BirthExpl[1] = "0".$BirthExpl[1]; }
-	if(pre_strlen($BirthExpl[0])=="2"&&pre_strlen($BirthExpl[1])=="2"&&pre_strlen($BirthExpl[2])=="4") {
-	$BirthIn = mktime(12,12,12,$BirthExpl[0],$BirthExpl[1],$BirthExpl[2]);
-	$BirthMonth=GMTimeChange("m",$BirthIn,0,0,"off");
-	$BirthDay=GMTimeChange("d",$BirthIn,0,0,"off");
-	$BirthYear=GMTimeChange("Y",$BirthIn,0,0,"off"); }
-	if(pre_strlen($BirthExpl[0])!="2"||pre_strlen($BirthExpl[1])!="2"||pre_strlen($BirthExpl[2])!="4") { 
-		$BirthMonth="0"; $BirthDay="0"; $BirthYear="0"; } }
-	if (!is_numeric($BirthExpl[0])||!is_numeric($BirthExpl[1])||!is_numeric($BirthExpl[2])) { 
-		$BirthMonth="0"; $BirthDay="0"; $BirthYear="0"; } }
-	if(count($BirthExpl)=="3"&&
-	checkdate($BirthExpl[0],$BirthExpl[1],$BirthExpl[2])==false) {
-	$BirthMonth="0"; $BirthDay="0"; $BirthYear="0"; }
-	if(count($BirthExpl)!="3") { $BirthMonth="0"; $BirthDay="0"; $BirthYear="0"; } }
-	if($_POST['EventDay']==null) { $BirthMonth="0"; $BirthDay="0"; $BirthYear="0"; }
-	if(!is_numeric($_POST['YourOffSet'])) { $_POST['YourOffSet'] = "0"; }
-	if($_POST['YourOffSet']>12) { $_POST['YourOffSet'] = "12"; }
-	if($_POST['YourOffSet']<-12) { $_POST['YourOffSet'] = "-12"; }
-	if(!is_numeric($_POST['MinOffSet'])) { $_POST['MinOffSet'] = "00"; }
-	if($_POST['MinOffSet']>59) { $_POST['MinOffSet'] = "59"; }
-	if($_POST['MinOffSet']<0) { $_POST['MinOffSet'] = "00"; }
-	$_POST['YourOffSet'] = $_POST['YourOffSet'].":".$_POST['MinOffSet'];
-	$_SESSION['UserTimeZone'] = $_POST['YourOffSet'];
-	$_SESSION['UserDST'] = $_POST['DST'];
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	$querynewprofile = query("UPDATE `".$Settings['sqltable']."members` SET `Interests`='%s',`Title`='%s',`Website`='%s',`TimeZone`='%s',`Gender`='%s',`DST`='%s',`LastActive`=%i,`BirthMonth`=%i,`BirthDay`=%i,`BirthYear`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Interests'],$_POST['Title'],$_POST['Website'],$_POST['YourOffSet'],$_POST['YourGender'],$_POST['DST'],$NewDay,$BirthMonth,$BirthDay,$BirthYear,$NewIP,$_SESSION['UserID']));
-	mysql_query($querynewprofile); } } }
-if($_GET['act']=="userinfo") {
-if($_POST['update']!="now") {
-$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-$result=mysql_query($query);
-$num=mysql_num_rows($result);
-$i=0;
-$YourID=mysql_result($result,$i,"id");
-$User1Email=mysql_result($result,$i,"Email"); 
-$userinfoact = url_maker($exfile['profile'],$Settings['file_ext'],"act=userinfo",$Settings['qstr'],$Settings['qsep'],$prexqstr['profile'],$exqstr['profile']);
-$profiletitle = " ".$ThemeSet['TitleDivider']." User Info Editer";
-?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['act'] == "profile" &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            $_POST['Interests'] = htmlspecialchars($_POST['Interests'], ENT_QUOTES, $Settings['charset']);
+            $_POST['Interests'] = @remove_spaces($_POST['Interests']);
+            $_POST['Title'] = htmlspecialchars($_POST['Title'], ENT_QUOTES, $Settings['charset']);
+            $_POST['Title'] = @remove_spaces($_POST['Title']);
+            $_POST['Website'] = htmlentities($_POST['Website'], ENT_QUOTES, $Settings['charset']);
+            $_POST['Website'] = @remove_spaces($_POST['Website']);
+            //$_POST['Signature'] = preg_replace("/&amp;#(x[a-f0-9]+|[0-9]+);/i", "&#$1;", $_POST['Signature']);
+            //$_POST['Signature'] = @remove_spaces($_POST['Signature']);
+            //$_POST['Signature'] = remove_bad_entities($_POST['Signature']);
+            /*    <_<  iWordFilter  >_>
+            by René Johnson - Cool Dude 2k */
+            $katarzynaqy = query("SELECT * FROM `".$Settings['sqltable']."wordfilter`", array(null));
+            $katarzynart = mysql_query($katarzynaqy);
+            $katarzynanm = mysql_num_rows($katarzynart);
+            $katarzynas = 0;
+            while ($katarzynas < $katarzynanm) {
+                $Filter = mysql_result($katarzynart, $katarzynas, "Filter");
+                $Replace = mysql_result($katarzynart, $katarzynas, "Replace");
+                $CaseInsensitive = mysql_result($katarzynart, $katarzynas, "CaseInsensitive");
+                if ($CaseInsensitive == "on") {
+                    $CaseInsensitive = "yes";
+                }
+                if ($CaseInsensitive == "off") {
+                    $CaseInsensitive = "no";
+                }
+                if ($CaseInsensitive != "yes" || $CaseInsensitive != "no") {
+                    $CaseInsensitive = "no";
+                }
+                $WholeWord = mysql_result($katarzynart, $katarzynas, "WholeWord");
+                if ($WholeWord == "on") {
+                    $WholeWord = "yes";
+                }
+                if ($WholeWord == "off") {
+                    $WholeWord = "no";
+                }
+                if ($WholeWord != "yes" || $WholeWord != "no") {
+                    $WholeWord = "no";
+                }
+                $Filter = preg_quote($Filter, "/");
+                if ($CaseInsensitive != "yes" && $WholeWord == "yes") {
+                    $_POST['Interests'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Interests']);
+                    $_POST['Title'] = preg_replace("/\b(".$Filter.")\b/", $Replace, $_POST['Title']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord == "yes") {
+                    $_POST['Interests'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Interests']);
+                    $_POST['Title'] = preg_replace("/\b(".$Filter.")\b/i", $Replace, $_POST['Title']);
+                }
+                if ($CaseInsensitive != "yes" && $WholeWord != "yes") {
+                    $_POST['Interests'] = preg_replace("/".$Filter."/", $Replace, $_POST['Interests']);
+                    $_POST['Title'] = preg_replace("/".$Filter."/", $Replace, $_POST['Title']);
+                }
+                if ($CaseInsensitive == "yes" && $WholeWord != "yes") {
+                    $_POST['Interests'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Interests']);
+                    $_POST['Title'] = preg_replace("/".$Filter."/i", $Replace, $_POST['Title']);
+                }
+                ++$katarzynas;
+            } @mysql_free_result($katarzynart);
+            if (!isset($_POST['EventDay'])) {
+                $_POST['EventDay'] = null;
+            }
+            if ($_POST['EventDay'] != null) {
+                $BirthExpl = explode("/", $_POST['EventDay']);
+                if (count($BirthExpl) != "3") {
+                    $BirthExpl[0] = "0";
+                    $BirthExpl[1] = "0";
+                    $BirthExpl[2] = "0";
+                }
+                if (!is_numeric($BirthExpl[0])) {
+                    $BirthExpl[0] = "0";
+                }
+                if (!is_numeric($BirthExpl[1])) {
+                    $BirthExpl[1] = "0";
+                }
+                if (!is_numeric($BirthExpl[2])) {
+                    $BirthExpl[2] = "0";
+                }
+                if (count($BirthExpl) == "3" && checkdate($BirthExpl[0], $BirthExpl[1], $BirthExpl[2]) == true) {
+                    if (is_numeric($BirthExpl[0]) && is_numeric($BirthExpl[1]) && is_numeric($BirthExpl[2])) {
+                        if (pre_strlen($BirthExpl[0]) == "1") {
+                            $BirthExpl[0] = "0".$BirthExpl[0];
+                        }
+                        if (pre_strlen($BirthExpl[1]) == "1") {
+                            $BirthExpl[1] = "0".$BirthExpl[1];
+                        }
+                        if (pre_strlen($BirthExpl[0]) == "2" && pre_strlen($BirthExpl[1]) == "2" && pre_strlen($BirthExpl[2]) == "4") {
+                            $BirthIn = mktime(12, 12, 12, $BirthExpl[0], $BirthExpl[1], $BirthExpl[2]);
+                            $BirthMonth = GMTimeChange("m", $BirthIn, 0, 0, "off");
+                            $BirthDay = GMTimeChange("d", $BirthIn, 0, 0, "off");
+                            $BirthYear = GMTimeChange("Y", $BirthIn, 0, 0, "off");
+                        }
+                        if (pre_strlen($BirthExpl[0]) != "2" || pre_strlen($BirthExpl[1]) != "2" || pre_strlen($BirthExpl[2]) != "4") {
+                            $BirthMonth = "0";
+                            $BirthDay = "0";
+                            $BirthYear = "0";
+                        }
+                    }
+                    if (!is_numeric($BirthExpl[0]) || !is_numeric($BirthExpl[1]) || !is_numeric($BirthExpl[2])) {
+                        $BirthMonth = "0";
+                        $BirthDay = "0";
+                        $BirthYear = "0";
+                    }
+                }
+                if (count($BirthExpl) == "3" &&
+                checkdate($BirthExpl[0], $BirthExpl[1], $BirthExpl[2]) == false) {
+                    $BirthMonth = "0";
+                    $BirthDay = "0";
+                    $BirthYear = "0";
+                }
+                if (count($BirthExpl) != "3") {
+                    $BirthMonth = "0";
+                    $BirthDay = "0";
+                    $BirthYear = "0";
+                }
+            }
+            if ($_POST['EventDay'] == null) {
+                $BirthMonth = "0";
+                $BirthDay = "0";
+                $BirthYear = "0";
+            }
+            if (!is_numeric($_POST['YourOffSet'])) {
+                $_POST['YourOffSet'] = "0";
+            }
+            if ($_POST['YourOffSet'] > 12) {
+                $_POST['YourOffSet'] = "12";
+            }
+            if ($_POST['YourOffSet'] < -12) {
+                $_POST['YourOffSet'] = "-12";
+            }
+            if (!is_numeric($_POST['MinOffSet'])) {
+                $_POST['MinOffSet'] = "00";
+            }
+            if ($_POST['MinOffSet'] > 59) {
+                $_POST['MinOffSet'] = "59";
+            }
+            if ($_POST['MinOffSet'] < 0) {
+                $_POST['MinOffSet'] = "00";
+            }
+            $_POST['YourOffSet'] = $_POST['YourOffSet'].":".$_POST['MinOffSet'];
+            $_SESSION['UserTimeZone'] = $_POST['YourOffSet'];
+            $_SESSION['UserDST'] = $_POST['DST'];
+            $NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            $querynewprofile = query("UPDATE `".$Settings['sqltable']."members` SET `Interests`='%s',`Title`='%s',`Website`='%s',`TimeZone`='%s',`Gender`='%s',`DST`='%s',`LastActive`=%i,`BirthMonth`=%i,`BirthDay`=%i,`BirthYear`=%i,`IP`='%s' WHERE `id`=%i", array($_POST['Interests'],$_POST['Title'],$_POST['Website'],$_POST['YourOffSet'],$_POST['YourGender'],$_POST['DST'],$NewDay,$BirthMonth,$BirthDay,$BirthYear,$NewIP,$_SESSION['UserID']));
+            mysql_query($querynewprofile);
+        }
+    }
+}
+if ($_GET['act'] == "userinfo") {
+    if ($_POST['update'] != "now") {
+        $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+        $result = mysql_query($query);
+        $num = mysql_num_rows($result);
+        $i = 0;
+        $YourID = mysql_result($result, $i, "id");
+        $User1Email = mysql_result($result, $i, "Email");
+        $userinfoact = url_maker($exfile['profile'], $Settings['file_ext'], "act=userinfo", $Settings['qstr'], $Settings['qsep'], $prexqstr['profile'], $exqstr['profile']);
+        $profiletitle = " ".$ThemeSet['TitleDivider']." User Info Editer";
+        ?>
 <div class="Table1Border">
 <table class="Table1" style="width: 100%;">
 <tr class="TableRow1">
@@ -685,53 +883,71 @@ $profiletitle = " ".$ThemeSet['TitleDivider']." User Info Editer";
 </tr>
 </table>
 </div>
-<?php @mysql_free_result($result); }
-if($_POST['update']=="now") {
-if($_POST['act']=="userinfo"&&
-	$_SESSION['UserGroup']!=$Settings['GuestGroup']) {
-	$query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
-	$result=mysql_query($query);
-	$num=mysql_num_rows($result);
-	$i=0;
-	$OldPassword=mysql_result($result,$i,"Password");
-	$OldHashType=mysql_result($result,$i,"HashType");
-	$OldJoined=mysql_result($result,$i,"Joined");
-	$OldSalt=mysql_result($result,$i,"Salt");
-	$UpdateHash = false; $NewSalt = salt_hmac(); 
-if($OldHashType=="ODFH") { 
-	$YourPassword = sha1(md5($_POST['OldPass']));
-	$NewPassword = b64e_hmac($_POST['Password'],$OldJoined,$NewSalt,"sha1"); }
-if($OldHashType=="DF4H") { 
-	$YourPassword = b64e_hmac($_POST['OldPass'],$OldJoined,$OldSalt,"sha1");
-	$NewPassword = b64e_hmac($_POST['Password'],$OldJoined,$NewSalt,"sha1"); }
-if($OldHashType=="iDBH"&&$UpdateHash!=true) { 
-	$YourPassword = b64e_hmac($_POST['OldPass'],$OldJoined,$OldSalt,"sha1");
-	$NewPassword = b64e_hmac($_POST['Password'],$OldJoined,$NewSalt,"sha1"); }
-if($YourPassword!=$OldPassword) { $Error="Yes"; ?>
+<?php @mysql_free_result($result);
+    }
+    if ($_POST['update'] == "now") {
+        if ($_POST['act'] == "userinfo" &&
+            $_SESSION['UserGroup'] != $Settings['GuestGroup']) {
+            $query = query("SELECT * FROM `".$Settings['sqltable']."members` WHERE `id`=%i LIMIT 1", array($_SESSION['UserID']));
+            $result = mysql_query($query);
+            $num = mysql_num_rows($result);
+            $i = 0;
+            $OldPassword = mysql_result($result, $i, "Password");
+            $OldHashType = mysql_result($result, $i, "HashType");
+            $OldJoined = mysql_result($result, $i, "Joined");
+            $OldSalt = mysql_result($result, $i, "Salt");
+            $UpdateHash = false;
+            $NewSalt = salt_hmac();
+            if ($OldHashType == "ODFH") {
+                $YourPassword = sha1(md5($_POST['OldPass']));
+                $NewPassword = b64e_hmac($_POST['Password'], $OldJoined, $NewSalt, "sha1");
+            }
+            if ($OldHashType == "DF4H") {
+                $YourPassword = b64e_hmac($_POST['OldPass'], $OldJoined, $OldSalt, "sha1");
+                $NewPassword = b64e_hmac($_POST['Password'], $OldJoined, $NewSalt, "sha1");
+            }
+            if ($OldHashType == "iDBH" && $UpdateHash != true) {
+                $YourPassword = b64e_hmac($_POST['OldPass'], $OldJoined, $OldSalt, "sha1");
+                $NewPassword = b64e_hmac($_POST['Password'], $OldJoined, $NewSalt, "sha1");
+            }
+            if ($YourPassword != $OldPassword) {
+                $Error = "Yes"; ?>
 <div class="TableMessage" style="text-align: center;">Your old Password did not match.<br />&nbsp;</div>
-<?php } if(pre_strlen($_POST['Password'])=="30") { $Error="Yes"; ?>
+<?php } if (pre_strlen($_POST['Password']) == "30") {
+    $Error = "Yes"; ?>
 <div class="TableMessage" style="text-align: center;">Your password is too big.<br />&nbsp;</div>
-<?php } if(pre_strlen($_POST['OldPass'])=="30") { $Error="Yes"; ?>
+<?php } if (pre_strlen($_POST['OldPass']) == "30") {
+    $Error = "Yes"; ?>
 <div class="TableMessage" style="text-align: center;">Your old password is too big.<br />&nbsp;</div>
-<?php } if ($_POST['Password']!=$_POST['RePassword']) { $Error="Yes";  ?>
+<?php } if ($_POST['Password'] != $_POST['RePassword']) {
+    $Error = "Yes";  ?>
 <div class="TableMessage" style="text-align: center;">Your passwords did not match.<br />&nbsp;</div>
 <?php }
-	$NewDay=GMTimeStamp();
-	$NewIP=$_SERVER['REMOTE_ADDR'];
-	if ($Error!="Yes") { $_SESSION['UserPass']=$NewPassword;
-	if($cookieDomain==null) {
-	@setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir); }
-	if($cookieDomain!=null) {
-	if($cookieSecure==true) {
-	@setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir, $cookieDomain, 1); }
-	if($cookieSecure==false) {
-	@setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir, $cookieDomain); } }
-	$_POST['Email'] = @remove_spaces($_POST['Email']);
-	$querynewuserinfo = query("UPDATE `".$Settings['sqltable']."members` SET `Password`='%s',`HashType`='iDBH',`Email`='%s',`LastActive`=%i,`IP`='%s',`Salt`='%s' WHERE `id`=%i", array($NewPassword,$_POST['Email'],$NewDay,$NewIP,$NewSalt,$_SESSION['UserID']));
-	mysql_query($querynewuserinfo); } } } }
+$NewDay = GMTimeStamp();
+            $NewIP = $_SERVER['REMOTE_ADDR'];
+            if ($Error != "Yes") {
+                $_SESSION['UserPass'] = $NewPassword;
+                if ($cookieDomain == null) {
+                    @setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir);
+                }
+                if ($cookieDomain != null) {
+                    if ($cookieSecure == true) {
+                        @setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir, $cookieDomain, 1);
+                    }
+                    if ($cookieSecure == false) {
+                        @setcookie("SessPass", $NewPassword, time() + (7 * 86400), $cbasedir, $cookieDomain);
+                    }
+                }
+                $_POST['Email'] = @remove_spaces($_POST['Email']);
+                $querynewuserinfo = query("UPDATE `".$Settings['sqltable']."members` SET `Password`='%s',`HashType`='iDBH',`Email`='%s',`LastActive`=%i,`IP`='%s',`Salt`='%s' WHERE `id`=%i", array($NewPassword,$_POST['Email'],$NewDay,$NewIP,$NewSalt,$_SESSION['UserID']));
+                mysql_query($querynewuserinfo);
+            }
+        }
+    }
+}
 ?>
-<?php if($_POST['update']=="now"&&$_GET['act']!=null) {
-	$profiletitle = " ".$ThemeSet['TitleDivider']." Updating Settings"; ?>
+<?php if ($_POST['update'] == "now" && $_GET['act'] != null) {
+    $profiletitle = " ".$ThemeSet['TitleDivider']." Updating Settings"; ?>
 </td></tr>
 <tr id="ProfileTitleEnd" class="TableRow4">
 <td class="TableRow4">&nbsp;</td>

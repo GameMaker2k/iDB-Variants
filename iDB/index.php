@@ -15,7 +15,9 @@
 */
 require('preindex.php');
 $usefileext = $Settings['file_ext'];
-if($ext=="noext"||$ext=="no ext"||$ext=="no+ext") { $usefileext = ""; }
+if ($ext == "noext" || $ext == "no ext" || $ext == "no+ext") {
+    $usefileext = "";
+}
 $filewpath = $exfile['index'].$usefileext.$_SERVER['PATH_INFO'];
 ?>
 
@@ -24,14 +26,17 @@ $filewpath = $exfile['index'].$usefileext.$_SERVER['PATH_INFO'];
 <body>
 <?php require($SettDir['inc'].'navbar.php');
 
-if($_GET['act']==null)
-{ $_GET['act']="view"; }
-if($_GET['act']=="view")
-{ require($SettDir['inc'].'forums.php'); }
-if($_GET['act']=="view"||$_GET['act']=="stats")
-{ require($SettDir['inc'].'stats.php'); }
+if ($_GET['act'] == null) {
+    $_GET['act'] = "view";
+}
+if ($_GET['act'] == "view") {
+    require($SettDir['inc'].'forums.php');
+}
+if ($_GET['act'] == "view" || $_GET['act'] == "stats") {
+    require($SettDir['inc'].'stats.php');
+}
 require($SettDir['inc'].'endpage.php');
 ?>
 </body>
 </html>
-<?php fix_amp($Settings['use_gzip'],$GZipEncode['Type']); ?>
+<?php fix_amp($Settings['use_gzip'], $GZipEncode['Type']); ?>
